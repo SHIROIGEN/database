@@ -8,7 +8,7 @@ public class DaoBase implements Dao {
 		this.url = url;
 	}
 	public DaoBase() {
-		this.url="";
+		this.url= "jdbc:sqlserver://127.0.0.1:1433;databaseName=DoubanDB;user=student;password=student";
 	}
 	public Connection getConnection() {
 		Connection con=null;
