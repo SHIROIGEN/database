@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 public class DaoMovie extends DouBan.DaoBase{
 	private void MyPrint(String a) {
@@ -87,21 +89,27 @@ public class DaoMovie extends DouBan.DaoBase{
 			stmt.executeQuery(query);
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			
 		}
 	}
 	public void InsertCinecism(int Userid) {
 		this.MyPrint("Start to Write the Cinecism!");
+		Date date = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+
 		
-		String Cin="INSERT INTO Cinecism VALUES(";
+		String Cin="INSERT INTO Cinecism VALUES('";
 		Cin+=this.MovieName;
 		Cin+="',";
 		Cin+="'";
 		Scanner s = new Scanner(System.in);
 		Cin+=s.nextLine();
-		Cin+="','";
+		Cin+="',";
 		Cin+=String.valueOf(Userid);
+		Cin+=",'";
+		Cin+=ft.format(date);
 		Cin+="');";
+		System.out.println(Cin);
 		s.close();
 		this.Insert(Cin);
 	}
@@ -184,5 +192,21 @@ public class DaoMovie extends DouBan.DaoBase{
 			sqlE.printStackTrace();
 	}	
 	}
-	
+	public void GetMoivebyType(String type) {
+		String query = "SELECT MovieName ,Type FROM Moive";
+		ResultSet rs = this.Search(query);
+		try {	
+			while(rs.next()) {
+				String child[]=null;
+				child=rs.getString(2).split(type);
+				if(child!=null) {
+					System.out.println(rs.getString(1);
+				}
+		}
+		}
+		catch(SQLException e) {}
+	}
+	public String GetName() {
+		return this.MovieName;
+	}
 }
