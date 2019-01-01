@@ -206,6 +206,20 @@ public class DaoMovie extends DouBan.DaoBase{
 		}
 		catch(SQLException e) {}
 	}
+	public void Rating(int Userid){
+		String query = "INSERT INTO Score VALUES(";
+		query+=String.valueOf(Userid);
+		query+=".'";
+		query+=this.MovieName;
+		query+="',";
+		float Rate;
+		Scanner s = new Scanner(System.in);
+		Rate = s.nextFloat();
+		query+=String.valueOf(Rate);
+		query+=");";
+		s.close();
+		this.Insert(query);
+	}
 	public String GetName() {
 		return this.MovieName;
 	}

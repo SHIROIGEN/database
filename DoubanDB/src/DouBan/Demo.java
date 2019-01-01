@@ -60,6 +60,8 @@ public class Demo {
 					}
 					else {
 					Movie.InsertCinecism(user.getid());
+					System.out.println("Please rate the movie");
+					Movie.Rating(user.getid());
 					}
 				}
 			}
