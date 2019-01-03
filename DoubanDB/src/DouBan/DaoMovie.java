@@ -200,27 +200,65 @@ public class DaoMovie extends DouBan.DaoBase{
 				String child[]=null;
 				child=rs.getString(2).split(type);
 				if(child!=null) {
-					System.out.println(rs.getString(1);
+					this.getMovie(rs.getString(1));
 				}
 		}
 		}
 		catch(SQLException e) {}
 	}
-	public void Rating(int Userid){
-		String query = "INSERT INTO Score VALUES(";
-		query+=String.valueOf(Userid);
-		query+=".'";
-		query+=this.MovieName;
-		query+="',";
-		float Rate;
-		Scanner s = new Scanner(System.in);
-		Rate = s.nextFloat();
-		query+=String.valueOf(Rate);
-		query+=");";
-		s.close();
-		this.Insert(query);
-	}
 	public String GetName() {
 		return this.MovieName;
+	}
+	public void Rating(int Userid) {
+		String query = "SELECT MovieScore FROM Score WHERE UserId=";
+		query+=String.valueOf(Userid);
+		query+=" AND MovieName='";
+		query+=this.MovieName;
+		query+="';";
+		ResultSet rs = this.Search(query);
+		try { 
+			
+			if(rs.next())
+			{
+				System.out.println("the movie's rate is "+rs.getFloat(1)+"\nchange the rate");
+				float c;
+				Scanner s = new Scanner(System.in);
+				c=s.nextFloat();
+				//s.close();
+				query = "UPDATE Score SET [MovieScore]=";
+				query+=String.valueOf(c);
+				query+=" WHEREi UserId=";
+				query+=String.valueOf(Userid);
+				query+=" AND MovieName='";
+				query+=this.MovieName;
+				query+="';";
+			
+				this.Insert(query);
+				
+				
+			}
+			else
+			{
+				System.out.println("rate the movie!");
+				float c;
+				Scanner s = new Scanner(System.in);
+				if(s.hasNextFloat()) {
+				c=s.nextFloat();
+			//`	s.close();
+				query = "INSERT INTO Score VALUES(";
+				query+=String.valueOf(Userid);
+				query+=",'";
+				query+=this.MovieName;
+				query+="',";
+				query+=String.valueOf(c);
+				query+=");";
+				this.Insert(query);
+				}
+				
+			}
+			
+		}
+		catch(SQLException e) {}
+		
 	}
 }

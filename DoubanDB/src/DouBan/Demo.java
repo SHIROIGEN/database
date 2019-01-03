@@ -22,7 +22,9 @@ public class Demo {
 		
 		while(true) {
 			System.out.println("please input the options\n");
+			
 			cmd = s.next();
+			
 			if(cmd.equals("Login")) {
 				s = new Scanner(System.in);
 				System.out.println("please input the username\n");
@@ -60,10 +62,19 @@ public class Demo {
 					}
 					else {
 					Movie.InsertCinecism(user.getid());
-					System.out.println("Please rate the movie");
-					Movie.Rating(user.getid());
 					}
 				}
+			}
+			if(cmd.equals("Rating")) {
+				System.out.println("Please rate the movie");
+				Movie.Rating(user.getid());
+			}
+			if(cmd.equals("Register")) {
+				System.out.println("please input the username\n");
+				username = s.next();
+				System.out.println("please input the password\n");
+				passwd = s.next();
+				user.Register(username, passwd);
 			}
 			if(cmd.equals("quit"))
 				break;
