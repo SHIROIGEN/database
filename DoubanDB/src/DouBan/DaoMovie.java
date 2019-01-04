@@ -261,4 +261,45 @@ public class DaoMovie extends DouBan.DaoBase{
 		catch(SQLException e) {}
 		
 	}
+	public void GetMoviebyActor(String name) {
+		String query="SELECT MovieName FROM Actor_Movie WHERE Actor='";
+		query+=name;
+		query+="';";
+		ResultSet rs = this.Search(query);
+		try {
+			while(rs.next())
+				System.out.println(rs.getString(1));
+		}
+		catch(SQLException e) {}
+	}
+	public void Tuijian(int Userid) {
+		String query="SELECT MovieName FROM Score WHRER UserId =";
+		query+=String.valueOf(Userid);
+		query+=" AND MovieScore=(SELECT MAX(MovieScore) FROM Score WHERE UserId=";
+		query+=String.valueOf(Userid);
+		query+=");";
+		ResultSet rs = this.Search(query);
+		//SELECT MovieName FROM Score WHERE MovieScore=(SELECT MAX(MovieScore)  as ma FROM Score where UserId=1) AND UserId=1;
+		try {
+			if(rs.next()){
+				String moviename = rs.getString(1);
+				query="SELECT Actor FROM Actor_Movie WHERE MovieName='";
+				query+=moviename;
+				query+="';";
+				ResultSet rs1 = this.Search(query);
+				try {
+					while(rs1.next());
+						String name = rs1.getString(1);
+						this.GetMoviebyActor(name);
+				}
+				catch(SQLException e) {}
+		}
+			else {
+				System.out.println("you didn't rate any movie!");
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

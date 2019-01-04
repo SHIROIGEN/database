@@ -76,6 +76,9 @@ public class Demo {
 				passwd = s.next();
 				user.Register(username, passwd);
 			}
+			if(cmd.equals("Tuijian")){
+				Movie.Tuijian(user.getid());
+			}
 			if(cmd.equals("quit"))
 				break;
 			
