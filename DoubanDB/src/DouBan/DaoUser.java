@@ -24,6 +24,7 @@ public class DaoUser extends DouBan.DaoBase{
 			rs = stmt.executeQuery(query);
 			
 			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,13 +99,13 @@ public class DaoUser extends DouBan.DaoBase{
 	}
 	public void Register(String username,String passwd) {
 		try {
-            // Éú³ÉÒ»¸öMD5¼ÓÃÜ¼ÆËãÕªÒª
+            // ç”Ÿæˆä¸€ä¸ªMD5åŠ å¯†è®¡ç®—æ‘˜è¦
             MessageDigest md = MessageDigest.getInstance("MD5");
-            // ¼ÆËãmd5º¯Êı
+            // è®¡ç®—md5å‡½æ•°
             md.update(passwd.getBytes());
-            // digest()×îºóÈ·¶¨·µ»Ømd5 hashÖµ£¬·µ»ØÖµÎª8Î»×Ö·û´®¡£ÒòÎªmd5 hashÖµÊÇ16Î»µÄhexÖµ£¬Êµ¼ÊÉÏ¾ÍÊÇ8Î»µÄ×Ö·û
-            // BigIntegerº¯ÊıÔò½«8Î»µÄ×Ö·û´®×ª»»³É16Î»hexÖµ£¬ÓÃ×Ö·û´®À´±íÊ¾£»µÃµ½×Ö·û´®ĞÎÊ½µÄhashÖµ
-            //Ò»¸öbyteÊÇ°ËÎ»¶ş½øÖÆ£¬Ò²¾ÍÊÇ2Î»Ê®Áù½øÖÆ×Ö·û£¨2µÄ8´Î·½µÈÓÚ16µÄ2´Î·½£©
+            // digest()æœ€åç¡®å®šè¿”å›md5 hashå€¼ï¼Œè¿”å›å€¼ä¸º8ä½å­—ç¬¦ä¸²ã€‚å› ä¸ºmd5 hashå€¼æ˜¯16ä½çš„hexå€¼ï¼Œå®é™…ä¸Šå°±æ˜¯8ä½çš„å­—ç¬¦
+            // BigIntegerå‡½æ•°åˆ™å°†8ä½çš„å­—ç¬¦ä¸²è½¬æ¢æˆ16ä½hexå€¼ï¼Œç”¨å­—ç¬¦ä¸²æ¥è¡¨ç¤ºï¼›å¾—åˆ°å­—ç¬¦ä¸²å½¢å¼çš„hashå€¼
+            //ä¸€ä¸ªbyteæ˜¯å…«ä½äºŒè¿›åˆ¶ï¼Œä¹Ÿå°±æ˜¯2ä½åå…­è¿›åˆ¶å­—ç¬¦ï¼ˆ2çš„8æ¬¡æ–¹ç­‰äº16çš„2æ¬¡æ–¹ï¼‰
             passwd = new BigInteger(1, md.digest()).toString(16);
         } catch (Exception e) {
            e.printStackTrace();
